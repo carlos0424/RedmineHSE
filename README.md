@@ -1,1 +1,1 @@
-# RedmineHSE
+# redmine_hse
