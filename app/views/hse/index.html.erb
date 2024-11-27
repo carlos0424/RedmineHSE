@@ -1,16 +1,43 @@
-<h2>Panel HSE - Colaboradores</h2>
+# app/views/hse/index.html.erb
+<% html_title l(:label_hse_dashboard) %>
+
+<div class="contextual">
+ <%= link_to l(:button_export_csv), 
+     hse_path(format: 'csv', search: params[:search], project_id: params[:project_id]),
+     class: 'icon icon-export' %>
+</div>
+
+<h2><%= l(:label_hse_dashboard) %></h2>
+
+<%= form_tag hse_path, method: :get, id: 'query_form' do %>
+ <fieldset>
+   <legend><%= l(:label_filter_plural) %></legend>
+   <div class="filters">
+     <label><%= l(:label_employee) %>:</label>
+     <%= text_field_tag :search, params[:search], size: 30 %>
+     
+     <label><%= l(:label_project) %>:</label>
+     <%= select_tag :project_id, 
+         options_from_collection_for_select(@projects, :id, :name, params[:project_id]),
+         prompt: "#{l(:label_all)}" %>
+         
+     <%= submit_tag l(:button_apply), name: nil, class: 'button-small' %>
+     <%= link_to l(:button_clear), hse_path, class: 'icon icon-reload' %>
+   </div>
+ </fieldset>
+<% end %>
 
 <div class="hse-dashboard">
  <table class="list issues">
    <thead>
      <tr>
-       <th>ID</th>
-       <th>Colaborador</th>
-       <th>Estado</th>
-       <th>Regional</th>
-       <th>Empresa</th>
-       <th>Documentos Pendientes</th>
-       <th>Próximos Vencimientos</th>
+       <th><%= l(:label_id) %></th>
+       <th><%= l(:label_employee) %></th>
+       <th><%= l(:field_status) %></th>
+       <th><%= l(:label_regional) %></th>
+       <th><%= l(:label_company) %></th>
+       <th><%= l(:label_pending_documents) %></th>
+       <th><%= l(:label_next_expiry) %></th>
      </tr>
    </thead>
    <tbody>
@@ -33,4 +60,6 @@
      <% end %>
    </tbody>
  </table>
+
+ <span class="pagination"><%= pagination_links_full @issue_pages, @issue_count %></span>
 </div>

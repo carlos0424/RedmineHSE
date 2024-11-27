@@ -1,3 +1,9 @@
 en:
  label_hse: 'HSE'
  label_hse_dashboard: 'Dashboard HSE'
+ label_employee: 'Colaborador'
+ label_regional: 'Regional'
+ label_company: 'Empresa'
+ label_pending_documents: 'Documentos Pendientes'
+ label_next_expiry: 'Próximos Vencimientos'
+ button_export_csv: 'Exportar CSV'

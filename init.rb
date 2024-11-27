@@ -1,3 +1,4 @@
+# init.rb
 require 'redmine'
 
 Redmine::Plugin.register :redmine_hse do
@@ -10,4 +11,10 @@ Redmine::Plugin.register :redmine_hse do
       { controller: 'hse', action: 'index' },
       caption: 'HSE',
       if: Proc.new { User.current.admin? }
+
+ # Permisos
+ project_module :hse do
+   permission :view_hse, { hse: [:index] }
+   permission :manage_hse, { hse: [:index, :show, :edit, :update] }
+ end
 end
