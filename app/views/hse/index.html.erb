@@ -1,36 +1,36 @@
 <h2>Panel HSE - Colaboradores</h2>
 
 <div class="hse-dashboard">
-  <table class="list issues">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Colaborador</th>
-        <th>Estado</th>
-        <th>Regional</th>
-        <th>Empresa</th>
-        <th>Documentos Pendientes</th>
-        <th>Próximos Vencimientos</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @issues.each do |issue| %>
-        <tr class="<%= cycle('odd', 'even') %>">
-          <td><%= link_to issue.id, issue_path(issue) %></td>
-          <td><%= issue.subject %></td>
-          <td style="background-color: <%= issue.status_color %>">
-            <%= issue.status %>
-          </td>
-          <td><%= issue.custom_field_value(7) %></td>
-          <td><%= issue.custom_field_value(8) %></td>
-          <td>
-            <%= pending_documents(issue) %>
-          </td>
-          <td>
-            <%= next_expiry_dates(issue) %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+ <table class="list issues">
+   <thead>
+     <tr>
+       <th>ID</th>
+       <th>Colaborador</th>
+       <th>Estado</th>
+       <th>Regional</th>
+       <th>Empresa</th>
+       <th>Documentos Pendientes</th>
+       <th>Próximos Vencimientos</th>
+     </tr>
+   </thead>
+   <tbody>
+     <% @issues.each do |issue| %>
+       <tr class="<%= cycle('odd', 'even') %>">
+         <td><%= link_to issue.id, issue_path(issue) %></td>
+         <td><%= issue.subject %></td>
+         <td style="background-color: <%= issue.status_color %>">
+           <%= issue.status %>
+         </td>
+         <td><%= issue.custom_field_value(7) %></td>
+         <td><%= issue.custom_field_value(8) %></td>
+         <td>
+           <%= pending_documents(issue) %>
+         </td>
+         <td>
+           <%= next_expiry_dates(issue) %>
+         </td>
+       </tr>
+     <% end %>
+   </tbody>
+ </table>
 </div>

@@ -7,5 +7,4 @@ module HseHelper
         content_tag(:span, "#{days} días restantes", class: 'text-success')
       end
     end
-  end
-  
+   end

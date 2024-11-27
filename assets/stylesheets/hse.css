@@ -1,16 +1,17 @@
 .hse-dashboard {
     margin: 20px;
-  }
-  
-  .hse-dashboard table {
+   }
+   
+   .hse-dashboard table {
     width: 100%;
     border-collapse: collapse;
-  }
-  
-  .hse-dashboard th, .hse-dashboard td {
+   }
+   
+   .hse-dashboard th, .hse-dashboard td {
     padding: 8px;
     border: 1px solid #ddd;
-  }
-  
-  .text-danger { color: #dc3545; }
-  .text-success { color: #28a745; }
+   }
+   
+   .text-danger { color: #dc3545; }
+   .text-success { color: #28a745; }
+   
