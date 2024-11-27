@@ -6,8 +6,7 @@ class HseController < ApplicationController
   def index
     @query = IssueQuery.new(name: 'HSE')
     @query.filters = {
-      'tracker_id' => { operator: '=', values: ['4'] },
-      'status_id' => { operator: '*', values: [''] }
+      'tracker_id' => { operator: '=', values: ['4'] }
     }
     
     if params[:search].present?
@@ -17,8 +16,9 @@ class HseController < ApplicationController
     if params[:project_id].present?
       @query.add_filter('project_id', '=', [params[:project_id]])
     end
- 
-    @issues = @query.issues
+
+    base_issues = @query.issues
+    @issues = base_issues.map { |i| HseIssue.find(i.id) }
     @custom_fields = CustomField.where(tracker_id: 4)
     
     respond_to do |format|
@@ -31,22 +31,20 @@ class HseController < ApplicationController
       }
     end
   end
- 
+
   private
- 
+  
   def find_projects
     @projects = Project.active.has_module(:issue_tracking)
   end
- 
+
   def export_issues_to_csv(issues)
     require 'csv'
     CSV.generate do |csv|
-      # Headers
       headers = ['ID', 'Colaborador', 'Estado', 'Regional', 'Empresa', 
                 'EMO', 'Evaluación', 'Dotación', 'Próximos Vencimientos']
       csv << headers
       
-      # Data
       issues.each do |issue|
         row = [
           issue.id,
@@ -63,11 +61,11 @@ class HseController < ApplicationController
       end
     end
   end
- 
+
   def next_expiry_dates_text(issue)
     dates = []
     dates << "EMO: #{issue.custom_field_value(17)}" if issue.custom_field_value(17).present?
     dates << "Reind.: #{issue.custom_field_value(15)}" if issue.custom_field_value(15).present?
     dates.join(' | ')
   end
- end
+end
